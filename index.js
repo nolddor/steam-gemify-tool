@@ -5,4 +5,4 @@ const figlet = require('figlet')
 
 console.log(figlet.textSync('Gemify Tool'))
 
-new Bot(config).logOn()
+new Bot(config).run()

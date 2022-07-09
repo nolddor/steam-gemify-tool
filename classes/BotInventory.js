@@ -9,11 +9,10 @@ const logger = require('./Logger')
 
 class BotInventory extends EventEmitter {
 
-    constructor(client, community) {
+    constructor(community) {
         super()
 
         this.community = community
-        this.client = client
 
         // Steam Community Tab
         this.bgAssets = []
