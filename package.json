@@ -1,6 +1,6 @@
 {
   "name": "steam-gemify-tool",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "CLI tool to convert to gems your Steam emoticons and backgrounds",
   "main": "index.js",
   "scripts": {

@@ -30,7 +30,7 @@ Bot.prototype.logOn = function() {
 
 
 Bot.prototype.onLoggedOn = function(details) {
-    logger.info(`Logged as ${this.config.username} successfully.`, {component: 'Auth'})
+    logger.info(`Logged as ${this.config.username} (${this.community.steamID.getSteamID64()}) successfully.`, {component: 'Auth'})
     this.inventory.loadInventories()
 }
 
