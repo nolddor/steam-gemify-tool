@@ -4,13 +4,13 @@
   "description": "CLI tool to convert to gems your Steam emoticons and backgrounds",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "eslint . && echo \"Warning: There are no test defined yet!\" && exit 0",
     "start": "node index.js"
   },
   "author": "Jack Nolddor",
   "license": "MIT",
   "engines": {
-    "node": ">=14.0"
+    "node": ">=18.0"
   },
   "dependencies": {
     "cli-spinner": "^0.2.10",
@@ -21,5 +21,12 @@
     "steamcommunity": "^3.44.1",
     "winston": "^3.7.2",
     "winston-daily-rotate-file": "^4.7.1"
+  },
+  "devDependencies": {
+    "eslint": "^8.32.0",
+    "eslint-config-standard": "^17.0.0",
+    "eslint-plugin-import": "^2.27.5",
+    "eslint-plugin-n": "^15.6.1",
+    "eslint-plugin-promise": "^6.1.1"
   }
 }
