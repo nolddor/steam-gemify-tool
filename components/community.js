@@ -1,7 +1,7 @@
-const Bot = require('../classes/Bot')
+const Tool = require('../classes/Tool')
 
 
-Bot.prototype.getGemValue = function(appid, assetid) {
+Tool.prototype.getGemValue = function(appid, assetid) {
     return new Promise((resolve, reject) => {
         this.community.getGemValue(appid, assetid, (error, result) => {
             if (error) {
@@ -14,7 +14,7 @@ Bot.prototype.getGemValue = function(appid, assetid) {
 }
 
 
-Bot.prototype.turnItemIntoGems = function(appid, assetid, expectedGemsValue) {
+Tool.prototype.turnItemIntoGems = function(appid, assetid, expectedGemsValue) {
     return new Promise((resolve, reject) => {
         this.community.turnItemIntoGems(appid, assetid, expectedGemsValue, (error, result) => {
             if (error) {

@@ -1,4 +1,4 @@
-const Bot = require('./classes/Bot')
+const Tool = require('./classes/Tool')
 const config = require('./config/settings')
 const figlet = require('figlet')
 
@@ -9,4 +9,4 @@ console.log('> Please, consider to sell them on Colette gems bot.')
 console.log('> See https://steamcommunity.com/profiles/76561199096164013')
 console.log('')
 
-new Bot(config).run()
+new Tool(config).run()

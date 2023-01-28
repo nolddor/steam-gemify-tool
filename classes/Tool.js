@@ -5,7 +5,7 @@ const EventEmitter = require('events')
 const logger = require('./Logger')
 
 
-class Bot extends EventEmitter{
+class Tool extends EventEmitter{
 
     constructor(config) {
         super()
@@ -36,6 +36,6 @@ class Bot extends EventEmitter{
 }
 
 
-module.exports = Bot
-// Require all the components that add their own methods to the Bot class' prototype
+module.exports = Tool
+// Require all the components that add their own methods to this class' prototype
 require('../components')

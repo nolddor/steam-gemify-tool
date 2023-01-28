@@ -1,10 +1,10 @@
-const Bot = require('../classes/Bot')
+const Tool = require('../classes/Tool')
 const Duration = require('../classes/Duration')
 const totp = require("steam-totp")
 const logger = require('../classes/Logger')
 
 
-Bot.prototype.logOn = function() {
+Tool.prototype.logOn = function() {
     logger.info('Connecting to Steam services...', {component: 'Auth'})
     this.community.login({
         "accountName": this.config.username,
@@ -29,17 +29,17 @@ Bot.prototype.logOn = function() {
 }
 
 
-Bot.prototype.onLoggedOn = function(details) {
+Tool.prototype.onLoggedOn = function(details) {
     logger.info(`Logged as ${this.config.username} (${this.community.steamID.getSteamID64()}) successfully.`, {component: 'Auth'})
     this.inventory.loadInventories()
 }
 
 
-Bot.prototype.getSteamGuardCode = function() {
+Tool.prototype.getSteamGuardCode = function() {
     return totp.getAuthCode(this.config.shared_secret)
 }
 
 
-Bot.prototype.onWebSessionExpired = function(error) {
+Tool.prototype.onWebSessionExpired = function(error) {
     logger.debug('The steamcommunity.com web session has expired. Re-connecting...', {component: 'Auth'})
 }

@@ -71,11 +71,11 @@ class BotInventory extends EventEmitter {
                 console.log()
 
                 if(!retries) {
-                    logger.error(`Unable to retrieve bot's inventory after (5) attemps!. Skipping...\n  > Reason: ${error.message || '-'}, Code: ${error.eresult || '-'}`, {component: 'Inventory'})
+                    logger.error(`Unable to retrieve inventory content after (5) attemps!. Skipping...\n  > Reason: ${error.message || '-'}, Code: ${error.eresult || '-'}`, {component: 'Inventory'})
                     return
                 }
 
-                logger.warn(`Unable to retrieve bot's inventory content. Retrying in 15 seconds...\n  > Reason: ${error.message || '-'}, Code: ${error.eresult || '-'}`, {component: 'Inventory'})
+                logger.warn(`Unable to retrieve inventory content. Retrying in 15 seconds...\n  > Reason: ${error.message || '-'}, Code: ${error.eresult || '-'}`, {component: 'Inventory'})
                 setTimeout(() => {
                     this.loadInventories(--retries)
                 }, +Duration.ofSeconds(15))
