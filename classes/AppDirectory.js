@@ -1,8 +1,6 @@
 const path = require('path')
 
-
 class AppDirectory {
-
     static logs() {
         return path.resolve(__dirname, '../logs')
     }
@@ -18,8 +16,6 @@ class AppDirectory {
     static config() {
         return path.resolve(__dirname, '../config')
     }
-
 }
-
 
 module.exports = AppDirectory

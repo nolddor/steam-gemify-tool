@@ -1,6 +1,5 @@
 const Tool = require('../classes/Tool')
 
-
 Tool.prototype.getGemValue = function(appid, assetid) {
     return new Promise((resolve, reject) => {
         this.community.getGemValue(appid, assetid, (error, result) => {
@@ -12,7 +11,6 @@ Tool.prototype.getGemValue = function(appid, assetid) {
         })
     })
 }
-
 
 Tool.prototype.turnItemIntoGems = function(appid, assetid, expectedGemsValue) {
     return new Promise((resolve, reject) => {

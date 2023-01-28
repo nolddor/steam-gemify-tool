@@ -1,8 +1,7 @@
-const Bot = require('../classes/Bot')
+const Tool = require('../classes/Tool')
 const logger = require('../classes/Logger')
 
-
-Bot.prototype.onError = function(error) {
+Tool.prototype.onError = function(error) {
     logger.error(error.stack)
     process.exit(1)
 }

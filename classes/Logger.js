@@ -2,7 +2,6 @@ const winston = require('winston')
 require('winston-daily-rotate-file')
 const AppDirectory = require('./AppDirectory')
 
-
 const logger = winston.createLogger({
     level: 'debug',
     format: winston.format.combine(
@@ -22,10 +21,10 @@ const logger = winston.createLogger({
                 winston.format.timestamp({
                     format: 'YYYY-MM-DD HH:mm:ss'
                 }),
-                winston.format.printf(info => winston.format.colorize().colorize(info.level, `[${info.timestamp}] [${info.component || ' - '}] ${info.message}`)),
-            ),
-        }),
-    ],
+                winston.format.printf(info => winston.format.colorize().colorize(info.level, `[${info.timestamp}] [${info.component || ' - '}] ${info.message}`))
+            )
+        })
+    ]
 })
 
 module.exports = logger

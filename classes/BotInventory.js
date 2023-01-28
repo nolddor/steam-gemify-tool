@@ -6,9 +6,7 @@ const ItemUtils = require('./ItemUtils')
 const Duration = require('./Duration')
 const logger = require('./Logger')
 
-
 class BotInventory extends EventEmitter {
-
     constructor(community) {
         super()
 
@@ -20,29 +18,27 @@ class BotInventory extends EventEmitter {
     }
 
     loadInventories(retries = 5) {
+        logger.info('Loading Steam Community inventory. Please, wait...', { component: 'Inventory' })
 
-        logger.info(`Loading Steam Community inventory. Please, wait...`, {component: 'Inventory'})
-
-        let spinner = new Spinner(' > processing... %s')
+        const spinner = new Spinner(' > processing... %s')
         spinner.setSpinnerDelay(75)
         spinner.start()
 
-        let loading = this.loadSteamInventory()
+        const loading = this.loadSteamInventory()
 
         Promise.all([loading])
             .then(([items]) => {
-
                 // Steam Community Tab
-                let allEmoteAssets = items.filter(ItemUtils.isEmoticon)
-                let allEmoteQty = allEmoteAssets.reduce((total, item) => total + (item.amount || 1), 0)
-                let allBgAssets = items.filter(ItemUtils.isProfileBackground)
-                let allBgQty = allBgAssets.reduce((total, item) => total + (item.amount || 1), 0)
+                const allEmoteAssets = items.filter(ItemUtils.isEmoticon)
+                const allEmoteQty = allEmoteAssets.reduce((total, item) => total + (item.amount || 1), 0)
+                const allBgAssets = items.filter(ItemUtils.isProfileBackground)
+                const allBgQty = allBgAssets.reduce((total, item) => total + (item.amount || 1), 0)
 
-                let groupByHashName = ( assets = [] ) => {
-                    let obj = {}
+                const groupByHashName = (assets = []) => {
+                    const obj = {}
 
-                    assets.forEach( asset => {
-                        let name = asset.market_hash_name
+                    assets.forEach(asset => {
+                        const name = asset.market_hash_name
 
                         obj[name] = obj[name] || []
                         obj[name].push(asset)
@@ -52,30 +48,29 @@ class BotInventory extends EventEmitter {
                 }
 
                 this.emoteAssets = groupByHashName(allEmoteAssets)
-                let emoteHashQty = Object.keys(this.emoteAssets).length
+                const emoteHashQty = Object.keys(this.emoteAssets).length
                 this.bgAssets = groupByHashName(allBgAssets)
-                let bgHashQty = Object.keys(this.bgAssets).length
+                const bgHashQty = Object.keys(this.bgAssets).length
 
                 spinner.stop()
                 console.log()
 
-                logger.info(` > Found ${Formatter.format(allEmoteQty)} emoticons in total.`, {component: 'Inventory'})
-                logger.info(` > Found ${Formatter.format(emoteHashQty)} unique emoticons.`, {component: 'Inventory'})
-                logger.info(` >`, {component: 'Inventory'})
-                logger.info(` > Found ${Formatter.format(allBgQty)} backgrounds in total.`, {component: 'Inventory'})
-                logger.info(` > Found ${Formatter.format(bgHashQty)} unique backgrounds.`, {component: 'Inventory'})
+                logger.info(` > Found ${Formatter.format(allEmoteQty)} emoticons in total.`, { component: 'Inventory' })
+                logger.info(` > Found ${Formatter.format(emoteHashQty)} unique emoticons.`, { component: 'Inventory' })
+                logger.info(' >', { component: 'Inventory' })
+                logger.info(` > Found ${Formatter.format(allBgQty)} backgrounds in total.`, { component: 'Inventory' })
+                logger.info(` > Found ${Formatter.format(bgHashQty)} unique backgrounds.`, { component: 'Inventory' })
                 this.emit('inventoryLoaded', {})
-
             }, error => {
                 spinner.stop()
                 console.log()
 
-                if(!retries) {
-                    logger.error(`Unable to retrieve inventory content after (5) attemps!. Skipping...\n  > Reason: ${error.message || '-'}, Code: ${error.eresult || '-'}`, {component: 'Inventory'})
+                if (!retries) {
+                    logger.error(`Unable to retrieve inventory content after (5) attemps!. Skipping...\n  > Reason: ${error.message || '-'}, Code: ${error.eresult || '-'}`, { component: 'Inventory' })
                     return
                 }
 
-                logger.warn(`Unable to retrieve inventory content. Retrying in 15 seconds...\n  > Reason: ${error.message || '-'}, Code: ${error.eresult || '-'}`, {component: 'Inventory'})
+                logger.warn(`Unable to retrieve inventory content. Retrying in 15 seconds...\n  > Reason: ${error.message || '-'}, Code: ${error.eresult || '-'}`, { component: 'Inventory' })
                 setTimeout(() => {
                     this.loadInventories(--retries)
                 }, +Duration.ofSeconds(15))
@@ -85,7 +80,6 @@ class BotInventory extends EventEmitter {
     loadSteamInventory() {
         return this.loadInventory(SteamInventories.STEAM_COMMUNITY)
     }
-
 
     loadInventory(inventory) {
         return new Promise((resolve, reject) => {
@@ -98,8 +92,6 @@ class BotInventory extends EventEmitter {
             })
         })
     }
-
 }
-
 
 module.exports = BotInventory

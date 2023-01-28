@@ -1,26 +1,25 @@
 class Duration {
-
     constructor(millis) {
         this.millis = millis || 0
     }
 
     static ofDays(days) {
-        let millis = (days || 0) * 24 * 60 * 60 * 1000
+        const millis = (days || 0) * 24 * 60 * 60 * 1000
         return new Duration(millis)
     }
 
     static ofHours(hours) {
-        let millis = (hours || 0) * 60 * 60 * 1000
+        const millis = (hours || 0) * 60 * 60 * 1000
         return new Duration(millis)
     }
 
     static ofMinutes(minutes) {
-        let millis = (minutes || 0) * 60 * 1000
+        const millis = (minutes || 0) * 60 * 1000
         return new Duration(millis)
     }
 
     static ofSeconds(seconds) {
-        let millis = (seconds || 0) * 1000
+        const millis = (seconds || 0) * 1000
         return new Duration(millis)
     }
 
@@ -80,12 +79,9 @@ class Duration {
         return this.millis / (1000 * 60)
     }
 
-
     valueOf() {
         return this.toMillis()
     }
-
 }
-
 
 module.exports = Duration

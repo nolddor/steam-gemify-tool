@@ -1,12 +1,9 @@
-const AppDirectory = require('./AppDirectory')
 const BotInventory = require('./BotInventory')
 const SteamCommunity = require('steamcommunity')
 const EventEmitter = require('events')
 const logger = require('./Logger')
 
-
-class Tool extends EventEmitter{
-
+class Tool extends EventEmitter {
     constructor(config) {
         super()
 
@@ -23,18 +20,16 @@ class Tool extends EventEmitter{
         this.on('error', (...args) => this.onError(...args))
 
         // Pre-checks
-        if(!this.config.username || !this.config.password || !this.config.shared_secret) {
-          logger.error('Verify your config/settings.js file.\n > Fields username, password and shared_secret are required.', {component: 'Tool'})
-          process.exit(1)
+        if (!this.config.username || !this.config.password || !this.config.shared_secret) {
+            logger.error('Verify your config/settings.js file.\n > Fields username, password and shared_secret are required.', { component: 'Tool' })
+            process.exit(1)
         }
     }
 
     run() {
         this.logOn()
     }
-
 }
-
 
 module.exports = Tool
 // Require all the components that add their own methods to this class' prototype
