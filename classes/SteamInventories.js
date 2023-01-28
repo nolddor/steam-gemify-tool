@@ -1,5 +1,4 @@
-class SteamInventory {
-
+class SteamInventories {
     static TF2 = {
         appid: 440,
         contextid: 2
@@ -14,8 +13,6 @@ class SteamInventory {
         appid: 753,
         contextid: 6
     }
-
 }
 
-
-module.exports = SteamInventory
+module.exports = SteamInventories

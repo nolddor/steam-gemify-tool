@@ -1,6 +1,6 @@
 const EventEmitter = require('events')
 const Spinner = require('cli-spinner').Spinner
-const SteamInventory = require('./SteamInventory')
+const SteamInventories = require('./SteamInventories')
 const Formatter = require('./Formatter')
 const ItemUtils = require('./ItemUtils')
 const Duration = require('./Duration')
@@ -83,7 +83,7 @@ class BotInventory extends EventEmitter {
     }
 
     loadSteamInventory() {
-        return this.loadInventory(SteamInventory.STEAM_COMMUNITY)
+        return this.loadInventory(SteamInventories.STEAM_COMMUNITY)
     }
 
 

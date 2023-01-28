@@ -1,4 +1,4 @@
-const SteamInventory = require('./SteamInventory')
+const SteamInventories = require('./SteamInventories')
 
 
 class ItemUtils {
@@ -22,7 +22,7 @@ class ItemUtils {
     }
 
     static isSteamCommunity(item) {
-        return item.appid == SteamInventory.STEAM_COMMUNITY.appid && item.contextid == SteamInventory.STEAM_COMMUNITY.contextid  // appid is "Steam" & contextid is "Community"
+        return item.appid == SteamInventories.STEAM_COMMUNITY.appid && item.contextid == SteamInventories.STEAM_COMMUNITY.contextid  // appid is "Steam" & contextid is "Community"
     }
 
 }
