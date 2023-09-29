@@ -18,6 +18,7 @@ class Bot extends EventEmitter{
 
         // Event bindings
         this.on('loggedOn', (...args) => this.onLoggedOn(...args))
+        this.once('loggedOn', (...args) => this.onceLoggedOn(...args))
         this.community.on('sessionExpired', (...args) => this.onWebSessionExpired(...args))
         this.inventory.on('inventoryLoaded', (...args) => this.onInventoryLoaded(...args))
         this.on('error', (...args) => this.onError(...args))

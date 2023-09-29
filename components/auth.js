@@ -31,9 +31,11 @@ Bot.prototype.logOn = function() {
 
 Bot.prototype.onLoggedOn = function(details) {
     logger.info(`Logged as ${this.config.username} (${this.community.steamID.getSteamID64()}) successfully.`, {component: 'Auth'})
-    this.inventory.loadInventories()
 }
 
+Bot.prototype.onceLoggedOn = function(details) {
+    this.inventory.loadInventories()
+}
 
 Bot.prototype.getSteamGuardCode = function() {
     return totp.getAuthCode(this.config.shared_secret)
@@ -42,4 +44,5 @@ Bot.prototype.getSteamGuardCode = function() {
 
 Bot.prototype.onWebSessionExpired = function(error) {
     logger.debug('The steamcommunity.com web session has expired. Re-connecting...', {component: 'Auth'})
+    this.logOn()
 }

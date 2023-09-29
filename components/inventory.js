@@ -3,6 +3,7 @@ const Formatter = require('../classes/Formatter')
 const Spinner = require('cli-spinner').Spinner
 const logger = require('../classes/Logger')
 const inquirer = require('inquirer')
+const { once } = require('node:events')
 
 
 Bot.prototype.onInventoryLoaded = function() {
@@ -62,9 +63,9 @@ Bot.prototype.grindItemsIntoGems = async function(assets = []) {
     spinner.setSpinnerDelay(75)
     spinner.start()
 
-    let gems_count = 0
-    let fail_count = 0
-    let success_count = 0
+    let gemsCount = 0
+    let failCount = 0
+    let successCount = 0
 
      for (const [index, item] of assets.entries()) {
         try {
@@ -73,12 +74,17 @@ Bot.prototype.grindItemsIntoGems = async function(assets = []) {
             let getGemValue = await this.getGemValue(item.market_fee_app, item.assetid)
             let turnItemIntoGems = await this.turnItemIntoGems(item.market_fee_app, item.assetid, getGemValue.gemValue)
 
-            gems_count += turnItemIntoGems.gemsReceived
-            success_count++
+            gemsCount += turnItemIntoGems.gemsReceived
+            successCount++
         } catch (e) {
             console.log()
             logger.error(`${e}`, {component: 'Tool'})
-            fail_count++
+            failCount++
+
+            if(['NotLoggedOn', 'Not Logged In'].includes(e.message)) {
+                this.onWebSessionExpired(e)
+                await once(this, 'loggedOn')
+            }
         }
     }
 
@@ -86,11 +92,11 @@ Bot.prototype.grindItemsIntoGems = async function(assets = []) {
     console.log()
 
     logger.info(`Process 'Gemify' has finished.`, {component: 'Tool'})
-    if(success_count) {
-        logger.info(`Your items (${Formatter.format(success_count)}) have been Gemified! You've gained ${Formatter.format(gems_count)} gems.`, {component: 'Tool'})
+    if(successCount) {
+        logger.info(`Your items (${Formatter.format(successCount)}) have been Gemified! You've gained ${Formatter.format(gemsCount)} gems.`, {component: 'Tool'})
     }
-    if(fail_count) {
-        logger.warn(`There were some errors. Unable to grind ${Formatter.format(fail_count)} items into gems.`, {component: 'Tool'})
+    if(failCount) {
+        logger.warn(`There were some errors. Unable to grind ${Formatter.format(failCount)} items into gems.`, {component: 'Tool'})
     }
 
     process.exit(0)

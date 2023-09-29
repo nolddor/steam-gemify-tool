@@ -1,6 +1,6 @@
 {
   "name": "steam-gemify-tool",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "CLI tool to convert to gems your Steam emoticons and backgrounds",
   "main": "index.js",
   "scripts": {
@@ -10,7 +10,7 @@
   "author": "Jack Nolddor",
   "license": "MIT",
   "engines": {
-    "node": ">=14.0"
+    "node": ">=18.0"
   },
   "dependencies": {
     "cli-spinner": "^0.2.10",
