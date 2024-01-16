@@ -32,11 +32,19 @@ Bot.prototype.onInventoryLoaded = function() {
     let toGems = []
 
     if(this.config.gemify_emote) {
-        toGems.push(...sliceExcess(this.inventory.emoteAssets, this.config.MAX_STOCK))
+        // Using spread syntax on Arrray#push() may lead on RangeError: Maximum call stack size exceeded errors if inventory is too large.
+        // Using forEach approach instead.
+        sliceExcess(this.inventory.emoteAssets, this.config.MAX_STOCK).forEach( asset => {
+            toGems.push(asset) 
+        })
     }
 
     if(this.config.gemify_bg) {
-        toGems.push(...sliceExcess(this.inventory.bgAssets, this.config.MAX_STOCK))
+        // Using spread syntax on Arrray#push() may lead on RangeError: Maximum call stack size exceeded errors if inventory is too large.
+        // Using forEach approach instead.
+        sliceExcess(this.inventory.bgAssets, this.config.MAX_STOCK).forEach( asset => {
+            toGems.push(asset) 
+        })
     }
 
     let toGemsQty = toGems.length
