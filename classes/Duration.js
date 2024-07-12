@@ -1,91 +1,87 @@
 class Duration {
+  constructor (millis) {
+    this.millis = millis || 0
+  }
 
-    constructor(millis) {
-        this.millis = millis || 0
-    }
+  static ofDays (days) {
+    const millis = (days || 0) * 24 * 60 * 60 * 1000
+    return new Duration(millis)
+  }
 
-    static ofDays(days) {
-        let millis = (days || 0) * 24 * 60 * 60 * 1000
-        return new Duration(millis)
-    }
+  static ofHours (hours) {
+    const millis = (hours || 0) * 60 * 60 * 1000
+    return new Duration(millis)
+  }
 
-    static ofHours(hours) {
-        let millis = (hours || 0) * 60 * 60 * 1000
-        return new Duration(millis)
-    }
+  static ofMinutes (minutes) {
+    const millis = (minutes || 0) * 60 * 1000
+    return new Duration(millis)
+  }
 
-    static ofMinutes(minutes) {
-        let millis = (minutes || 0) * 60 * 1000
-        return new Duration(millis)
-    }
+  static ofSeconds (seconds) {
+    const millis = (seconds || 0) * 1000
+    return new Duration(millis)
+  }
 
-    static ofSeconds(seconds) {
-        let millis = (seconds || 0) * 1000
-        return new Duration(millis)
-    }
+  static ofMillis (millis) {
+    return new Duration(millis || 0)
+  }
 
-    static ofMillis(millis) {
-        return new Duration(millis || 0)
-    }
+  plusDays (days) {
+    this.millis += (days || 0) * 24 * 60 * 60 * 1000
+    return this
+  }
 
-    plusDays(days) {
-        this.millis += (days || 0) * 24 * 60 * 60 * 1000
-        return this
-    }
+  plusHours (hours) {
+    this.millis += (hours || 0) * 60 * 60 * 1000
+    return this
+  }
 
-    plusHours(hours) {
-        this.millis += (hours || 0) * 60 * 60 * 1000
-        return this
-    }
+  plusMinutes (minutes) {
+    this.millis += (minutes || 0) * 60 * 1000
+    return this
+  }
 
-    plusMinutes(minutes) {
-        this.millis += (minutes || 0) * 60 * 1000
-        return this
-    }
+  plusSeconds (seconds) {
+    this.millis += (seconds || 0) * 100
+    return this
+  }
 
-    plusSeconds(seconds) {
-        this.millis += (seconds || 0) * 100
-        return this
-    }
+  minusDays (days) {
+    this.millis -= (days || 0) * 24 * 60 * 60 * 1000
+    return this
+  }
 
-    minusDays(days) {
-        this.millis -= (days || 0) * 24 * 60 * 60 * 1000
-        return this
-    }
+  minusHours (hours) {
+    this.millis -= (hours || 0) * 60 * 60 * 1000
+    return this
+  }
 
-    minusHours(hours) {
-        this.millis -= (hours || 0) * 60 * 60 * 1000
-        return this
-    }
+  minusMinutes (minutes) {
+    this.millis -= (minutes || 0) * 60 * 1000
+    return this
+  }
 
-    minusMinutes(minutes) {
-        this.millis -= (minutes || 0) * 60 * 1000
-        return this
-    }
+  minusSeconds (seconds) {
+    this.millis -= (seconds || 0) * 1000
+    return this
+  }
 
-    minusSeconds(seconds) {
-        this.millis -= (seconds || 0) * 1000
-        return this
-    }
+  toMillis () {
+    return this.millis
+  }
 
-    toMillis() {
-        return this.millis
-    }
+  toSeconds () {
+    return this.millis / 1000
+  }
 
-    toSeconds() {
-        return this.millis / 1000
-    }
+  toMinutes () {
+    return this.millis / (1000 * 60)
+  }
 
-    toMinutes() {
-        return this.millis / (1000 * 60)
-    }
-
-
-    valueOf() {
-        return this.toMillis()
-    }
-
+  valueOf () {
+    return this.toMillis()
+  }
 }
-
 
 module.exports = Duration

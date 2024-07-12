@@ -1,6 +1,5 @@
-const requireDir = require('require-dir');
-
+const requireDir = require('require-dir')
 
 module.exports = requireDir('.', {
-    recurse: true
+  recurse: true,
 })
