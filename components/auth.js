@@ -1,16 +1,19 @@
 const Bot = require('../classes/Bot')
-const totp = require('steam-totp')
 const logger = require('../classes/Logger')
+const { askSteamGuardMobileCode } = require('../classes/Inquirer')
 
-Bot.prototype.logOn = function () {
-  logger.info('Connecting to Steam services...', { component: 'Auth' })
+Bot.prototype.logOn = function (accountName, password, twoFactorCode) {
   this.community.login({
-    accountName: this.config.username,
-    password: this.config.password,
-    twoFactorCode: this.getSteamGuardCode(),
+    accountName,
+    password,
+    twoFactorCode,
     disableMobile: true,
-  }, (error, sessionID, cookies, steamguard, oAuthToken) => {
-    if (error) {
+  }, async (error, sessionID, cookies, steamguard, oAuthToken) => {
+    if (error?.message === 'SteamGuardMobile') {
+      logger.warn('Missing or Invalid SteamGuard Mobile Code!', { component: 'Auth' })
+      const code = (await askSteamGuardMobileCode()).code
+      this.logOn(accountName, password, code)
+    } else if (error) {
       this.emit('error', error)
     } else {
       this.emit('loggedOn', {
@@ -31,11 +34,7 @@ Bot.prototype.onceLoggedOn = function (details) {
   this.inventory.loadInventories()
 }
 
-Bot.prototype.getSteamGuardCode = function () {
-  return totp.getAuthCode(this.config.shared_secret)
-}
-
 Bot.prototype.onWebSessionExpired = function () {
   logger.debug('The steamcommunity.com web session has expired. Re-connecting...', { component: 'Auth' })
-  this.logOn()
+  this.logOn(this.config.username, this.config.password)
 }

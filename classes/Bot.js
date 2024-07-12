@@ -21,14 +21,15 @@ class Bot extends EventEmitter {
     this.on('error', (...args) => this.onError(...args))
 
     // Pre-checks
-    if (!this.config.username || !this.config.password || !this.config.shared_secret) {
-      logger.error('Verify your config/settings.js file.\n > Fields username, password and shared_secret are required.', { component: 'Tool' })
+    if (!this.config.username || !this.config.password) {
+      logger.error('Verify your config/settings.js file.\n > Fields username and password are required.', { component: 'Tool' })
       process.exit(1)
     }
   }
 
   run () {
-    this.logOn()
+    logger.info('Connecting to Steam services...', { component: 'Auth' })
+    this.logOn(this.config.username, this.config.password)
   }
 }
 
