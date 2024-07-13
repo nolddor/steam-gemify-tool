@@ -5,7 +5,7 @@ Made by [Jack Nolddor](https://steamcommunity.com/profiles/76561198983211883) fo
 ### How to
 Gemify is built on top of [Node.JS](https://nodejs.org/), make sure to install it before installing Gemify.
 
-To install Gemify you will need to use the terminal.
+To install Gemify you need to download the [latest version](https://github.com/nolddor/steam-gemify-tool/releases/latest) and use the terminal.
 Open your terminal and navigate to the folder in which you put the Gemify files. You can then run the `npm install` command to install Gemify.
 
 Ensure you properly configure the `config\settings.js` file first and use the command `npm start` to run Gemify Tool
